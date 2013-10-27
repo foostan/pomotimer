@@ -1,0 +1,22 @@
+{
+    "name": "Pomotimer",
+    "version": "0.1",
+    "manifest_version": 2,
+
+    "description": "Pomotimer is a timer/list for pomodoro techniche.",
+
+    "permissions": [
+    ],
+
+    "options_page" : "options.html",
+
+    "background": {
+        "scripts": ["assets/js/background.js"]
+    },
+
+    "browser_action": {
+        "default_icon": "assets/img/icon19.png",
+        "default_title": "Pomotimer",
+        "default_popup":"popup.html"
+    }
+}
