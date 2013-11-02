@@ -1,0 +1,22 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 400px;
+}
+
+.timmer {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Coda Caption', sans-serif;
+}
+
+.page-header {
+    margin: 10px 0 10px 0;
+
+}
+
+.btn {
+    border: 1px solid white;
+
+}
