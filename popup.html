@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
 <link href="assets/css/pomotimer.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Coda+Caption:800' rel='stylesheet' type='text/css'>
 </head>
@@ -10,77 +10,89 @@
 <body>
 <div class="container">
 
-    <div class="page-header">
-        <h1 class="text-danger timmer">25:00</h1>
+    <header class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Today</a></li>
+                <li><a href="#">Inventory</a></li>
+                <li><a href="#">Archived</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </header>
 
-        <h4>Running activity</h4>
+    <div class="panel-group" id="accordion">
 
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-arrow-down"></span></button>
-            <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-ok"></span></button>
-            <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-transfer"></span></button>
-            <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
-        </div>
-
-        <div class="btn-group btn-group-justified">
-            <a class="btn btn-primary" href="#"><span class="glyphicon glyphicon-play-circle"></span> Start</a>
-            <a class="btn btn-success" href="#"><span class="glyphicon glyphicon-tree-deciduous"></span> Break</a>
-            <a class="btn btn-danger" href="#"><span class="glyphicon glyphicon-ban-circle"></span> Stop</a>
-        </div>
-    </div>
-
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr><th>Today</th></tr>
-        </thead>
-        <tbody>
-        <tr><td>
-                Activity1
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        Collapsible Group Item #1
+                    </a>
+                </span>
                 <span class="badge">2</span>
                 <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-arrow-up"></span></button>
                     <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-ok"></span></button>
-                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-transfer"></span></button>
                     <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
                 </div>
-        </td></tr>
-        <tr><td>
-                Activity2
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-arrow-up"></span></button>
-                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-ok"></span></button>
-                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-transfer"></span></button>
-                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>
+                        hogehoge
+                    </p>
                 </div>
-        </td></tr>
-        </tbody>
-    </table>
+                <hr />
+                <div>
+                        <h4 id="timer1" class="text-danger timer">25:00</h4>
+                        <div class="btn-group btn-group-justified">
+                            <a class="btn btn-primary btn-start" href="#"><span class="glyphicon glyphicon-play-circle"></span> Start</a>
+                            <a class="btn btn-success btn-break" href="#"><span class="glyphicon glyphicon-tree-deciduous"></span> Break</a>
+                            <a class="btn btn-danger btn-reset" href="#"><span class="glyphicon glyphicon-ban-circle"></span> Reset</a>
+                        </div>
+                </div>
+            </div>
+        </div>
 
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr><th>Finished</th></tr>
-        </thead>
-        <tbody>
-        <tr><td>
-                Finished activity1
-                <span class="badge">7</span>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                        Collapsible Group Item #1
+                    </a>
+                </span>
+                <span class="badge">2</span>
                 <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-open"></span></button>
+                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-ok"></span></button>
                     <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
                 </div>
-        </td></tr>
-        <tr><td>
-                Finished activity2
-                <span class="badge">5</span>
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-open"></span></button>
-                    <button type="button" class="btn btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>
+                        hogehoge
+                    </p>
                 </div>
-        </td></tr>
-        </tbody>
-    </table>
+                <hr />
+                <div>
+                    <h4 id="timer2" class="text-danger timer">25:00</h4>
+                    <div class="btn-group btn-group-justified">
+                        <a class="btn btn-primary btn-start" href="#"><span class="glyphicon glyphicon-play-circle"></span> Start</a>
+                        <a class="btn btn-success btn-break" href="#"><span class="glyphicon glyphicon-tree-deciduous"></span> Break</a>
+                        <a class="btn btn-danger btn-reset" href="#"><span class="glyphicon glyphicon-ban-circle"></span> Reset</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
 
 </div> <!-- /container -->
+<script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/popup.js"></script>
 </body>
 </html>
 
