@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularApp')
-.controller('MainCtrl', function ($scope) {
+.controller('TodoCtrl', function ($scope) {
     $scope.items = [
         {
             name: 'HTML5 Boilerplate',

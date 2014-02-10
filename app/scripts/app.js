@@ -1,18 +1,18 @@
 'use strict';
 
 angular.module('angularApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute'
+               'ngCookies',
+               'ngResource',
+               'ngSanitize',
+               'ngRoute'
 ])
-  .config(function ($routeProvider) {
+.config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
+    .when('/', {
+        templateUrl: 'views/todo.html',
+        controller: 'TodoCtrl'
+    })
+    .otherwise({
         redirectTo: '/'
-      });
-  });
+    });
+});
