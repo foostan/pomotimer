@@ -1,18 +1,23 @@
-<div class="header">
-  <ul class="nav nav-pills pull-right">
-    <li class="active"><a ng-href="#">Home</a></li>
-    <li><a ng-href="#">About</a></li>
-    <li><a ng-href="#">Contact</a></li>
-  </ul>
-</div>
-
 <section ng-controller="TodoCtrl">
-  <div class="row marketing" ng-repeat="item in items">
-    <h4>{{item.name}}</h4>
-    <p>{{item.dist}}</p>
-  </div>
-</section>
+  <header>
+    <ul class="nav nav-pills">
+      <li class="active"><a ng-href="#">Today</a></li>
+      <li><a ng-href="#">Inventory</a></li>
+      <li><a ng-href="#">Archived</a></li>
+    </ul>
+  </header>
 
-<div class="footer">
-  <p>♥ from the Yeoman team</p>
-</div>
+  <sction>
+    <accordion close-others="oneAtATime">
+      <accordion-group is-open="isopen" ng-repeat="task in tasks">
+        <accordion-heading>
+          {{task.title}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        </accordion-heading>
+        {{task.content}}
+      </accordion-group>
+    </accordion>
+  </sction>
+
+  <footer>
+  </footer>
+</section>
