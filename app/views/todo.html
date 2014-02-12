@@ -1,6 +1,4 @@
-<section ng-controller="TodoCtrl">
-  <header>
-    <ul class="nav nav-pills">
+<section ng-controller="TodoCtrl"> <header> <ul class="nav nav-pills">
       <li class="active"><a ng-href="#">Today</a></li>
       <li><a ng-href="#">Inventory</a></li>
       <li><a ng-href="#">Archived</a></li>
@@ -8,14 +6,18 @@
   </header>
 
   <sction>
-    <accordion close-others="oneAtATime">
-      <accordion-group is-open="isopen" ng-repeat="task in tasks">
-        <accordion-heading>
-          {{task.title}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
-        </accordion-heading>
-        {{task.content}}
-      </accordion-group>
-    </accordion>
+    <div ng-repeat="task in tasks">
+        <div class="task" ng:class="{true:'task-done', false:'task-wip'}[task.done==true]">
+          <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.done==true]" glyphicon-unchecked" ng-click="task.done = !task.done"></span>
+          <a ng-click="isCollapsed = !isCollapsed">
+              {{task.title}}
+          </a>
+        </div>
+        <div collapse="{{task.open}}">
+            {{task.content}}
+        </div>
+    </div>
+
   </sction>
 
   <footer>

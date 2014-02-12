@@ -6,12 +6,22 @@ function TodoCtrl($scope) {
 
   $scope.tasks = [
     {
-      title: "Dynamic Group Header - 1",
-      content: "Dynamic Group Body - 1"
+      title: 'sample task - 1',
+      content: 'sample task - 1',
+      done: true,
+      open: 'isCollapsed'
     },
     {
-      title: "Dynamic Group Header - 2",
-      content: "Dynamic Group Body - 2"
+      title: 'sample task - 1',
+      content: 'sample task - 1',
+      done: true,
+      open: '!isCollapsed'
+    },
+    {
+      title: 'sample task - 3',
+      content: 'sample task - 3',
+      done: false,
+      open: '!isCollapsed'
     }
   ];
 }
