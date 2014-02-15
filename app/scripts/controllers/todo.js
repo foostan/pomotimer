@@ -6,22 +6,25 @@ function TodoCtrl($scope) {
   $scope.tasks = [
     {
       title: 'sample task',
-      pomodoro_total: 1,
+      state: 'today',
       pomodoro_today: 1,
+      pomodoro_total: 1,
       done: true,
       collapsed: 'isCollapsed'
     },
     {
       title: 'sample task',
-      pomodoro_total: 5,
+      state: 'today',
       pomodoro_today: 1,
+      pomodoro_total: 5,
       done: true,
       collapsed: '!isCollapsed'
     },
     {
       title: 'sample task',
-      pomodoro_total: 2,
+      state: 'today',
       pomodoro_today: 1,
+      pomodoro_total: 1,
       done: false,
       collapsed: '!isCollapsed'
     }
@@ -46,8 +49,8 @@ function TodoCtrl($scope) {
   $scope.addTask = function() {
     $scope.tasks.unshift({
       title: '',
-      pomodoro_total: 0,
-      pomodoro_today: 0,
+      pomodoro_total: null,
+      pomodoro_today: null,
       done: false,
       collapsed: '!isCollapsed'
     });

@@ -112,7 +112,7 @@ body {
 /* Task */
 .task {
     border-bottom: 1px dotted $border-color;
-    > .title {
+    .title {
         color: $text-color;
         font-weight: bold;
     }
@@ -121,7 +121,7 @@ body {
         color: $text-color;
     }
 
-    > .editable-click {
+    .editable-click {
         color: $text-color;
         border-bottom: none;
     }
