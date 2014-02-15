@@ -97,7 +97,14 @@ body {
 
     > li {
         > a {
-            padding: 2px 10px;
+            padding: 1px 10px;
+        }
+    }
+}
+.nav-pills {
+    > li {
+        > a {
+            border-radius: 0px;
         }
     }
 }
@@ -105,7 +112,7 @@ body {
 /* Task */
 .task {
     border-bottom: 1px dotted $border-color;
-    > a {
+    > a.title {
         color: $text-color;
         font-weight: bold;
     }
@@ -116,13 +123,28 @@ body {
 }
 
 .task-done {
-    > a {
+    > a.title {
         text-decoration: line-through;
     }
 }
 
 .task-wip {
-    > a {
+    > a.title {
     }
 }
 
+/* editable form */
+.editable-controls {
+    > .form-control {
+        height: auto;
+        padding: 0px 5px;
+        border-radius: 0px;
+    }
+
+    > .editable-buttons {
+        > .btn {
+            padding: 0px 5px;
+            border-radius: 0px;
+        }
+    }
+}

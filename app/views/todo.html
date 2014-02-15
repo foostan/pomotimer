@@ -8,12 +8,18 @@
   <sction>
     <div ng-repeat="task in tasks">
         <div class="task" ng:class="{true:'task-done', false:'task-wip'}[task.done==true]">
-          <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.done==true]" glyphicon-unchecked" ng-click="task.done = !task.done"></span>
-          <a ng-click="isCollapsed = !isCollapsed">
-              {{task.title}}
-          </a>
+            <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.done==true]" glyphicon-unchecked" ng-click="task.done = !task.done"></span>
+            <a class="title" ng-hide="textbtnform.$visible" ng-click="isCollapsed = !isCollapsed">
+                {{ task.title }}
+            </a>
+            <span ng-hide="!textbtnform.$visible" editable-text="task.title" e-form="textbtnform">
+                {{ task.title || 'empty' }}
+            </span>
+            <a ng-click="textbtnform.$show()" ng-hide="textbtnform.$visible">
+              edit
+            </a>
         </div>
-        <div collapse="{{task.open}}">
+        <div collapse="{{task.collapsed}}">
             {{task.content}}
         </div>
     </div>

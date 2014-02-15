@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('angularApp', [
+var app = angular.module('angularApp', [
                'ngCookies',
                'ngResource',
                'ngSanitize',
                'ngRoute',
-               'ui.bootstrap'
+               'ui.bootstrap',
+               'xeditable'
 ])
 .config(function ($routeProvider) {
     $routeProvider
@@ -16,4 +17,9 @@ angular.module('angularApp', [
     .otherwise({
         redirectTo: '/'
     });
+});
+
+
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'
 });

@@ -9,19 +9,19 @@ function TodoCtrl($scope) {
       title: 'sample task - 1',
       content: 'sample task - 1',
       done: true,
-      open: 'isCollapsed'
+      collapsed: 'isCollapsed'
     },
     {
-      title: 'sample task - 1',
-      content: 'sample task - 1',
+      title: 'sample task - 2',
+      content: 'sample task - 2',
       done: true,
-      open: '!isCollapsed'
+      collapsed: '!isCollapsed'
     },
     {
       title: 'sample task - 3',
       content: 'sample task - 3',
       done: false,
-      open: '!isCollapsed'
+      collapsed: '!isCollapsed'
     }
   ];
 }
