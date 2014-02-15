@@ -1,6 +1,5 @@
 'use strict';
 
-
 function TodoCtrl($scope) {
   $scope.oneAtATime = true;
 
@@ -44,4 +43,17 @@ function TodoCtrl($scope) {
     }
   };
 
+  $scope.addTask = function() {
+    $scope.tasks.unshift({
+      title: '',
+      pomodoro_total: 0,
+      pomodoro_today: 0,
+      done: false,
+      collapsed: '!isCollapsed'
+    });
+  };
+
+  $scope.delTask = function(i) {
+    $scope.tasks.splice(i, 1);
+  };
 }

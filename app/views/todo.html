@@ -1,4 +1,6 @@
-<section ng-controller="TodoCtrl"> <header> <ul class="nav nav-pills">
+<section ng-controller="TodoCtrl">
+  <header>
+    <ul class="nav nav-pills">
       <li class="active"><a ng-href="#">Today</a></li>
       <li><a ng-href="#">Inventory</a></li>
       <li><a ng-href="#">Archived</a></li>
@@ -6,31 +8,38 @@
   </header>
 
   <sction>
-    <div ng-repeat="task in tasks">
-        <div class="task" ng:class="{true:'task-done', false:'task-wip'}[task.done==true]">
-            <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.done==true]" glyphicon-unchecked" ng-click="task.done = !task.done"></span>
-            <span class="title" editable-text="task.title">
-                {{ task.title || 'no title' }}
-            </span>
-            - 
-            <span class="pomodoro_today" editable-number="task.pomodoro_today" onbeforesave="checkTaskPomodoroToday(task, $data)">
-                {{ task.pomodoro_today || 'empty' }}
-            </span>
-            /
-            <span class="pomodoro_total" editable-number="task.pomodoro_total" onbeforesave="checkTaskPomodoroTotal(task, $data)">
-                {{ task.pomodoro_total || 'empty' }}
-            </span>
-            
-
-            <a class="" ng-click="isCollapsed = !isCollapsed">
-                pomo
-            </a>
-        </div>
-        <div collapse="{{task.collapsed}}">
-            hoge
-        </div>
+    <div>
+      <a class="btn-addtask" ng-click="addTask()">
+        <i class="glyphicon glyphicon-plus-sign"></i> Add task
+      </a>
     </div>
+    <div ng-repeat="task in tasks">
+      <div class="task" ng:class="{true:'task-done', false:'task-wip'}[task.done==true]">
+        <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.done==true]" glyphicon-unchecked" ng-click="task.done = !task.done"></span>
+        <span class="title" editable-text="task.title">
+            {{ task.title || 'no title' }}
+        </span>
+        - 
+        <span class="pomodoro_today" editable-number="task.pomodoro_today" onbeforesave="checkTaskPomodoroToday(task, $data)">
+            {{ task.pomodoro_today }}
+        </span>
+        /
+        <span class="pomodoro_total" editable-number="task.pomodoro_total" onbeforesave="checkTaskPomodoroTotal(task, $data)">
+            {{ task.pomodoro_total }}
+        </span>
 
+        <a class="btn-pomodoro" ng-click="isCollapsed = !isCollapsed">
+            pomo
+        </a>
+
+        <a class="btn-deltask" ng-click="delTask($index)">
+            del
+        </a>
+      </div>
+      <div collapse="{{task.collapsed}}">
+          hoge
+      </div>
+    </div>
   </sction>
 
   <footer>
