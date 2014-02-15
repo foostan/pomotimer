@@ -112,7 +112,7 @@ body {
 /* Task */
 .task {
     border-bottom: 1px dotted $border-color;
-    > a.title {
+    > .title {
         color: $text-color;
         font-weight: bold;
     }
@@ -120,16 +120,21 @@ body {
     > .glyphicon {
         color: $text-color;
     }
+
+    > .editable-click {
+        color: $text-color;
+        border-bottom: none;
+    }
 }
 
 .task-done {
-    > a.title {
+    > .title {
         text-decoration: line-through;
     }
 }
 
 .task-wip {
-    > a.title {
+    > .title {
     }
 }
 
@@ -139,6 +144,14 @@ body {
         height: auto;
         padding: 0px 5px;
         border-radius: 0px;
+    }
+
+    > .form-control[type=number] {
+        width: 50px;
+    }
+
+    > .form-control[type=text] {
+        width: 200px;
     }
 
     > .editable-buttons {
