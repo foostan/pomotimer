@@ -1,9 +1,9 @@
 <section ng-controller="TodoCtrl">
   <header>
     <ul class="nav nav-pills">
-      <li class="active"><a ng-href="#">Today</a></li>
-      <li><a ng-href="#">Inventory</a></li>
-      <li><a ng-href="#">Archived</a></li>
+      <li ng:class="{true: 'active'}[state == 'today']"><a ng-click="state = 'today'">Today</a></li>
+      <li ng:class="{true: 'active'}[state == 'inventory']"><a ng-click="state = 'inventory'">Inventory</a></li>
+      <li ng:class="{true: 'active'}[state == 'archived']"><a ng-click="state = 'archived'">Archived</a></li>
     </ul>
   </header>
 
@@ -13,7 +13,7 @@
         <i class="glyphicon glyphicon-plus-sign"></i> Add task
       </a>
     </div>
-    <div ng-repeat="task in tasks">
+    <div ng-repeat="task in tasks | filter:{state: state}">
       <div class="task" ng:class="{true:'task-done', false:'task-wip'}[task.done==true]">
         <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.done==true]" glyphicon-unchecked" ng-click="task.done = !task.done"></span>
 
@@ -23,7 +23,7 @@
 
         <span ng-if="task.pomodoro_total != null">
           - 
-          <span ng-if="task.state == 'today'">
+          <span ng-if="state == 'today'">
             <span class="pomodoro_today" editable-number="task.pomodoro_today" onbeforesave="checkTaskPomodoroToday(task, $data)">
               {{ task.pomodoro_today }}
             </span>

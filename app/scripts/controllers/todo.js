@@ -1,7 +1,7 @@
 'use strict';
 
 function TodoCtrl($scope) {
-  $scope.oneAtATime = true;
+  $scope.state = 'today';
 
   $scope.tasks = [
     {
@@ -49,6 +49,7 @@ function TodoCtrl($scope) {
   $scope.addTask = function() {
     $scope.tasks.unshift({
       title: '',
+      state: $scope.state,
       pomodoro_total: null,
       pomodoro_today: null,
       done: false,
