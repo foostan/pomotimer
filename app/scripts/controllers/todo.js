@@ -1,63 +1,34 @@
 'use strict';
 
-function TodoCtrl($scope) {
-  $scope.state = 'today';
+function TodoCtrl($scope, TaskManager, PomodoroTimer) {
+  $scope.category = 'today';
+  $scope.tm = TaskManager;
+  $scope.tasks = $scope.tm.tasks;
+  $scope.timer = PomodoroTimer;
 
-  $scope.tasks = [
-    {
-      title: 'sample task',
-      state: 'today',
-      pomodoro_today: 1,
-      pomodoro_total: 1,
-      done: true,
-      collapsed: 'isCollapsed'
-    },
-    {
-      title: 'sample task',
-      state: 'today',
-      pomodoro_today: 1,
-      pomodoro_total: 5,
-      done: true,
-      collapsed: '!isCollapsed'
-    },
-    {
-      title: 'sample task',
-      state: 'today',
-      pomodoro_today: 1,
-      pomodoro_total: 1,
-      done: false,
-      collapsed: '!isCollapsed'
-    }
-  ];
+  $scope.resetPomodoro = function(task) {
+    $scope.tm.resetWip(task);
+  }
 
-  $scope.checkTaskPomodoroToday = function(task, data) {
+  $scope.toggleState = function(task) {
+    $scope.tm.toggleState(task);
+  }
+
+  /* validate */
+  $scope.checkCountToday = function(task, data) {
     if (data == null || data == NaN) {
       return "Please input a number";
-    } else if (data > task.pomodoro_total) {
-      return "Please input " + task.pomodoro_total + " or less";
+    } else if (data > task.count_total) {
+      return "Please input " + task.count_total + " or less";
     }
   };
 
-  $scope.checkTaskPomodoroTotal = function(task, data) {
+  $scope.checkCountTotal = function(task, data) {
     if (data == null || data == NaN) {
       return "Please input a number";
-    } else if (data < task.pomodoro_today) {
-      return "Please input " + task.pomodoro_total + " or over";
+    } else if (data < task.count_today) {
+      return "Please input " + task.count_total + " or over";
     }
   };
 
-  $scope.addTask = function() {
-    $scope.tasks.unshift({
-      title: '',
-      state: $scope.state,
-      pomodoro_total: null,
-      pomodoro_today: null,
-      done: false,
-      collapsed: '!isCollapsed'
-    });
-  };
-
-  $scope.delTask = function(i) {
-    $scope.tasks.splice(i, 1);
-  };
 }

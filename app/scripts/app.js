@@ -6,20 +6,19 @@ var app = angular.module('angularApp', [
                'ngSanitize',
                'ngRoute',
                'ui.bootstrap',
-               'xeditable'
+               'xeditable',
+               'timer'
 ])
 .config(function ($routeProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'views/todo.html',
-        controller: 'TodoCtrl'
-    })
+            templateUrl: 'views/todo.html'
+        }
+    )
     .otherwise({
         redirectTo: '/'
     });
-});
-
-
-app.run(function(editableOptions) {
+})
+.run(function(editableOptions) {
   editableOptions.theme = 'bs3'
 });
