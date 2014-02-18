@@ -21,16 +21,16 @@
           {{ task.title || 'no title' }}
         </span>
 
-        <span ng-if="task.pomodoro_total != null">
+        <span ng-if="task.count_total != null">
           - 
           <span ng-if="category == 'today'">
-            <span class="pomodoro_today" editable-number="task.pomodoro_today" onbeforesave="checkTaskPomodoroToday(task, $data)">
-              {{ task.pomodoro_today }}
+            <span class="count_today" editable-number="task.count_today" onbeforesave="checkCountToday(task, $data)">
+              {{ task.count_today }}
             </span>
             /
           </span>
-          <span class="pomodoro_total" editable-number="task.pomodoro_total" onbeforesave="checkTaskPomodoroTotal(task, $data)">
-            {{ task.pomodoro_total }}
+          <span class="count_total" editable-number="task.count_total" onbeforesave="checkCountTotal(task, $data)">
+            {{ task.count_total }}
           </span>
         </span>
 
