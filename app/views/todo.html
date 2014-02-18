@@ -43,9 +43,9 @@
         </a>
       </div>
       <div collapse="task.state != 'wip'">
-        <span>{{ task.pomodoro_start_time }}</span>
-        <button ng-click="startTimer()" ng-disabled="timerRunning">Start Timer</button>
-        <button ng-click="stopTimer()" ng-disabled="!timerRunning">Stop Timer</button>
+        <span>{{ time }}</span>
+        <button ng-click="start(task)" ng-disabled="timer.running">Start Timer</button>
+        <button ng-click="stop(task)" ng-disabled="!timer.running">Stop Timer</button>
       </div>
     </div>
   </sction>
