@@ -59,6 +59,11 @@ app.factory("TaskManager", function() {
         case 'wip': task.state = 'done'; break;
         case 'done': task.state = 'none'; break;
       }
+    },
+
+    countup: function(task) {
+      task.count_today++;
+      task.count_total++;
     }
   };
 });

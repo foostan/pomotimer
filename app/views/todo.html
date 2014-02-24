@@ -44,8 +44,9 @@
       </div>
       <div collapse="task.state != 'wip'">
         <span>{{ time }}</span>
-        <button ng-click="start(task)" ng-disabled="timer.running">Start Timer</button>
-        <button ng-click="stop(task)" ng-disabled="!timer.running">Stop Timer</button>
+        <span>{{ start_time }}</span>
+        <button ng-click="timer_start(task)" ng-disabled="running">Start Timer</button>
+        <button ng-click="timer_stop(task)" ng-disabled="!running">Stop Timer</button>
       </div>
     </div>
   </sction>

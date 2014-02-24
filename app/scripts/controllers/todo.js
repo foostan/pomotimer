@@ -8,38 +8,46 @@ function TodoCtrl($scope, $interval, TaskManager, PomodoroTimer) {
 
   $scope.resetPomodoro = function(task) {
     $scope.tm.resetWip(task);
-    $scope.timer.reset(task);
+    $scope.timer_stop(task);
   }
 
   $scope.toggleState = function(task) {
     $scope.tm.toggleState(task);
+    $scope.timer_stop(task);
   }
 
+  /* timer */
+  var running;
+  $scope.time = PomodoroTimer.getTime();
+  $scope.start_time = PomodoroTimer.getStartTime();
+  $scope.running = PomodoroTimer.isRunning();
 
-
-  var stop;
-  $scope.limit = 10;
-  $scope.time = $scope.limit;
-  $scope.start = function() {
-    // Don't start a new fight if we are already fighting
-    if ( angular.isDefined(stop) ) return;
-    $scope.start_time = parseInt((new Date)/1000);
- 
-    stop = $interval(function() {
-      var now = parseInt((new Date)/1000);
-      $scope.time = $scope.limit - (now - $scope.start_time);
-      if($scope.time == 0) {
-        $scope.stop();
+  $scope.timer_start = function(task) {
+    PomodoroTimer.start(task);
+    if ( angular.isDefined(running) ) return;
+    running = $interval(function() {
+      if(PomodoroTimer.isFinished()) {
+        $scope.timer_stop(task);
       }
-
+      $scope.time = PomodoroTimer.getTime();
+      $scope.running = PomodoroTimer.isRunning();
     }, 1000);
-  };
+  }
 
-  $scope.stop = function() {
-      if (angular.isDefined(stop)) {
-          $interval.cancel(stop);
-          stop = undefined;
-      }
+  $scope.timer_stop = function(task) {
+    if (angular.isDefined(running)) {
+      $interval.cancel(running);
+      running = undefined;
+    }
+
+    if (PomodoroTimer.isFinished()) {
+      console.log("finished");
+      $scope.tm.countup(task);
+    }
+    PomodoroTimer.stop(task);
+    $scope.time = PomodoroTimer.getTime();
+    $scope.start_time = PomodoroTimer.getStartTime();
+    $scope.running = PomodoroTimer.isRunning();
   }
 
   /* validate */
@@ -61,5 +69,4 @@ function TodoCtrl($scope, $interval, TaskManager, PomodoroTimer) {
       return "Please input " + task.count_total + " or over";
     }
   };
-
 }
