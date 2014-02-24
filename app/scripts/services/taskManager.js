@@ -1,32 +1,19 @@
 'use strict';
 
 app.factory("TaskManager", function() {
-  var tasks = [
-    {
-      title: 'sample task',
-      category: 'today',
-      count_today: 1,
-      count_total: 1,
-      state: 'wip'
-    },
-    {
-      title: 'sample task',
-      category: 'today',
-      count_today: 1,
-      count_total: 5,
-      state: 'done'
-    },
-    {
-      title: 'sample task',
-      category: 'today',
-      count_today: 1,
-      count_total: 1,
-      state: 'none'
-    }
-  ];
+  var STORAGE_ID = 'pomotimer';
+  var tasks = [];
 
   return {
-    tasks: tasks,
+    get: function () {
+      tasks = JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+      return tasks;
+    },
+
+    put: function (tascs) {
+      tasks = tascs
+      localStorage.setItem(STORAGE_ID, JSON.stringify(tasks));
+    },
 
     add: function(task) {
       task = task || {};

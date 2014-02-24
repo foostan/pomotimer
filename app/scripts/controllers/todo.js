@@ -3,8 +3,16 @@
 function TodoCtrl($scope, $interval, TaskManager, PomodoroTimer) {
   $scope.category = 'today';
   $scope.tm = TaskManager;
-  $scope.tasks = $scope.tm.tasks;
+  var tasks = $scope.tasks = $scope.tm.get();
   $scope.timer = PomodoroTimer;
+
+
+  /* task */
+  $scope.$watch('tasks', function (newValue, oldValue) {
+    if (newValue !== oldValue) {
+      $scope.tm.put(tasks);
+    }
+  }, true);
 
   $scope.resetPomodoro = function(task) {
     $scope.tm.resetWip(task);
