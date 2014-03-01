@@ -38,6 +38,18 @@
           pomodoro
         </a>
 
+        <a ng-hide="task.category=='today'" class="btn-chcategory" ng-click="chCategory(task, 'today')">
+            to_today
+        </a>
+
+        <a ng-hide="task.category=='inventory'" class="btn-chcategory" ng-click="chCategory(task, 'inventory')">
+            to_inventory
+        </a>
+
+        <a ng-hide="task.category=='archived'" class="btn-chcategory" ng-click="chCategory(task, 'archived')">
+            to_archived
+        </a>
+
         <a class="btn-deltask" ng-click="tm.del(task)">
             del
         </a>

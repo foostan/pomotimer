@@ -40,6 +40,13 @@ app.factory("TaskManager", function() {
       tasks[tasks.indexOf(task)].state = 'wip';
     },
 
+    chCategory: function(task, category) {
+        if (task.state=="wip") {
+          task.state = 'none';
+        }
+        task.category = category;
+    },
+
     toggleState: function(task) {
       switch (task.state) {
         case 'none': task.state = 'done'; break;

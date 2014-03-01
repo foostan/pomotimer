@@ -24,6 +24,11 @@ function TodoCtrl($scope, $interval, TaskManager, PomodoroTimer) {
     $scope.timer_stop(task);
   }
 
+  $scope.chCategory = function(task, category) {
+    $scope.tm.chCategory(task, category);
+    $scope.timer_stop(task);
+  }
+
   /* timer */
   var running;
   $scope.time = PomodoroTimer.getTime();
