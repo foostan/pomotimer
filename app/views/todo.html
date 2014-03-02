@@ -17,8 +17,7 @@
     </div>
     <div ng-repeat="task in tasks | filter:{category: category}">
       <div class="task" ng:class="{true:'task-done', false:'task-wip'}[task.state=='done']">
-        <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.state=='done']"
-              glyphicon-unchecked" ng-click="toggleState(task)"></span>
+        <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.state=='done']" glyphicon-unchecked ng-click="toggleState(task)"></span>
 
         <span class="title" editable-text="task.title">
           {{ task.title || 'no title' }}
@@ -68,9 +67,9 @@
 
       </div>
       <div collapse="task.state != 'wip'" class="pomodoro-timer">
-        <div class="time">{{time | timer}}<div>
-          <button class="btn btn-primary" ng-click="timer_start(task)" ng-disabled="running">Start Timer</button>
-          <button class="btn btn-danger" ng-click="timer_stop(task)" ng-disabled="!running">Reset Timer</button>
+        <div class="time">{{time | timer}}</div>
+          <button class="btn btn-primary" ng-click="timer_start(task)" ng-disabled="running"><i class="glyphicon glyphicon-play"></i> Start Timer</button>
+          <button class="btn btn-danger" ng-click="timer_stop(task)" ng-disabled="!running"><i class="glyphicon glyphicon-stop"></i> Stop Timer</button>
         </div>
       </div>
     </div>
