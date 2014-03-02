@@ -91,6 +91,13 @@ body {
     }
 }
 
+
+/* Button */
+.btn {
+  border-radius: 0px;
+  padding: 0px 5px;
+}
+
 /* Navigation */
 .nav {
     padding: 10px 0px;
@@ -168,4 +175,15 @@ a {
 }
 .editable-click {
     cursor: pointer;
+}
+
+/* pomodoro */
+.pomodoro-timer {
+  padding: 10px;
+
+  > .time {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+  }
 }

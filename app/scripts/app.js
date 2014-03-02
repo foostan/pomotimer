@@ -7,7 +7,7 @@ var app = angular.module('angularApp', [
                'ngRoute',
                'ui.bootstrap',
                'xeditable',
-               'timer'
+               'todoFilters',
 ])
 .config(function ($routeProvider) {
     $routeProvider
