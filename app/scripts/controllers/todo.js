@@ -1,6 +1,7 @@
 'use strict';
 
-function TodoCtrl($scope, $interval, TaskManager, PomodoroTimer) {
+app.controller("TodoCtrl", function ($scope, $interval, TaskManager, PomodoroTimer) {
+
     $scope.category = 'today';
     $scope.tm = TaskManager;
     var tasks = $scope.tasks = $scope.tm.get();
@@ -81,4 +82,4 @@ function TodoCtrl($scope, $interval, TaskManager, PomodoroTimer) {
             return "Please input " + task.count_total + " or over";
         }
     };
-}
+});
