@@ -45,6 +45,11 @@ app.controller("TodoCtrl", function ($scope, $interval, TaskManager, PomodoroTim
             $scope.time = PomodoroTimer.getTime();
             $scope.running = PomodoroTimer.isRunning();
         }, 1000);
+
+        chrome.extension.sendRequest({
+            action: 'timer-start',
+            time: $scope.time
+        });
     }
 
     $scope.timer_stop = function (task) {
@@ -61,7 +66,16 @@ app.controller("TodoCtrl", function ($scope, $interval, TaskManager, PomodoroTim
         $scope.time = PomodoroTimer.getTime();
         $scope.start_time = PomodoroTimer.getStartTime();
         $scope.running = PomodoroTimer.isRunning();
+
+        chrome.extension.sendRequest({
+            action: 'timer-stop',
+            time: $scope.time
+        });
     }
+
+    chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
+        console.log(request);
+    });
 
     /* validate */
     $scope.checkCountToday = function (task, data) {
