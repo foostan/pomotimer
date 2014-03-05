@@ -1,9 +1,9 @@
 'use strict';
 
 app.factory("PomodoroTimer", function() {
-  var POMODORO_TIME = 1500;
-  var time = POMODORO_TIME;
-  var target_task = null;
+    var POMODORO_TIME = 10;
+    var time = POMODORO_TIME;
+    var target_task = null;
   var start_time = null;
   var isRunning = false;
 
