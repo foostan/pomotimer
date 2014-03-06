@@ -5,7 +5,10 @@ app.controller("TodoCtrl", function ($scope, $interval, TaskManager, PomodoroTim
     $scope.category = 'today';
     $scope.tm = TaskManager;
     var tasks = $scope.tasks = $scope.tm.get();
+    $scope.tm.resetCountToday(tasks);
     $scope.timer = PomodoroTimer;
+
+    console.log(tasks);
 
     /* task */
     $scope.$watch('tasks', function (newValue, oldValue) {
