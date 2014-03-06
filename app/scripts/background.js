@@ -3,6 +3,14 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
     switch (request.action) {
         case "timer-start":
             timeout = setTimeout(function () {
+                chrome.notifications.create('pomotimer', {
+                    type: "basic",
+                    title: "Pomodoro finish!",
+                    message: request.task.title,
+                    contextMessage: "contextMessage",
+                    iconUrl: "images/yeoman.png"
+                }, function () {});
+
                 chrome.extension.sendRequest({
                     action: 'timer-stop',
                     task: request.task
