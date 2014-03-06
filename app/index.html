@@ -45,7 +45,7 @@
 <body ng-app="angularApp" ng-csp>
 
 <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+<div class="container" ng-view=""></div>
 
 <section ng-controller="TodoCtrl">
   <header>
@@ -66,57 +66,56 @@
     </div>
     <div ng-repeat="task in tasks | filter:{category: category}">
       <div class="task" ng:class="{true:'task-done', false:'task-wip'}[task.state=='done']">
-          <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.state=='done']"
-                glyphicon-unchecked ng-click="toggleState(task)"></span>
+        <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.state=='done']"
+              glyphicon-unchecked ng-click="toggleState(task)"></span>
 
-          <span class="title" editable-text="task.title">
-            {{ task.title || 'no title' }}
-          </span>
+        <span class="title" editable-text="task.title">
+          {{ task.title || 'no title' }}
+        </span>
 
-          <span ng-if="task.count_total != null">
-            -
-            <span ng-if="category == 'today'">
-              <span class="count_today" editable-number="task.count_today" onbeforesave="checkCountToday(task, $data)">
-                {{ task.count_today }}
-              </span>
-              /
+        <span ng-if="task.count_total != null">
+          -
+          <span ng-if="category == 'today'">
+            <span class="count_today" editable-number="task.count_today" onbeforesave="checkCountToday(task, $data)">
+              {{ task.count_today }}
             </span>
-            <span class="count_total" editable-number="task.count_total" onbeforesave="checkCountTotal(task, $data)">
-              {{ task.count_total }}
-            </span>
+            /
           </span>
-
-        <a ng-hide="task.state=='done' || task.category!='today'" class="btn-pomodoro" ng-click="resetPomodoro(task)">
+          <span class="count_total" editable-number="task.count_total" onbeforesave="checkCountTotal(task, $data)">
+            {{ task.count_total }}
+          </span>
+        </span>
+        <a ng-if="task.state!='done' && task.category=='today'" class="btn-pomodoro" ng-click="resetPomodoro(task)">
           <i class="glyphicon glyphicon-time"></i>
         </a>
-            <span class="dropdown">
-                <a class="dropdown-toggle"><i class="glyphicon glyphicon-cog"></i></a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a ng-hide="task.category=='today'" class="btn-chcategory" ng-click="chCategory(task, 'today')">
-                      <i class="glyphicon glyphicon-chevron-right"></i> Move to Today
-                    </a>
-                  </li>
-                  <li>
-                    <a ng-hide="task.category=='inventory'" class="btn-chcategory"
-                       ng-click="chCategory(task, 'inventory')">
-                      <i class="glyphicon glyphicon-chevron-right"></i> Move to Inventory
-                    </a>
-                  </li>
-                  <li>
-                    <a ng-hide="task.category=='archived'" class="btn-chcategory"
-                       ng-click="chCategory(task, 'archived')">
-                      <i class="glyphicon glyphicon-chevron-right"></i> Move to Archived
-                    </a>
-                  </li>
-                  <li role="presentation" class="divider"></li>
-                  <li>
-                    <a class="btn-deltask" ng-click="tm.del(task)">
-                      <i class="glyphicon glyphicon-trash"></i> Delete
-                    </a>
-                  </li>
-                </ul>
-            </span>
+        <span class="dropdown">
+          <a class="dropdown-toggle"><i class="glyphicon glyphicon-cog"></i></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a ng-if="task.category!='today'" class="btn-chcategory" ng-click="chCategory(task, 'today')">
+                <i class="glyphicon glyphicon-chevron-right"></i> Move to Today
+              </a>
+            </li>
+            <li>
+              <a ng-if="task.category!='inventory'" class="btn-chcategory"
+                 ng-click="chCategory(task, 'inventory')">
+                <i class="glyphicon glyphicon-chevron-right"></i> Move to Inventory
+              </a>
+            </li>
+            <li>
+              <a ng-if="task.category!='archived'" class="btn-chcategory"
+                 ng-click="chCategory(task, 'archived')">
+                <i class="glyphicon glyphicon-chevron-right"></i> Move to Archived
+              </a>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li>
+              <a class="btn-deltask" ng-click="tm.del(task)">
+                <i class="glyphicon glyphicon-trash"></i> Delete
+              </a>
+            </li>
+          </ul>
+        </span>
       </div>
       <div collapse="task.state != 'wip'" class="pomodoro-timer">
         <div class="time">{{time | timer}}</div>
