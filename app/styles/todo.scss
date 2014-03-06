@@ -13,9 +13,9 @@ $border-color: #bbb;
 
 /* Space out content a bit */
 body {
-  height: 500px;
-  width: 500px;
-  padding-bottom: 20px;
+  height: 700px;
+  width: 360px;
+  padding: 5px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -189,4 +189,12 @@ a {
     font-weight: bold;
     color: red;
   }
+}
+
+footer {
+  position: absolute;
+  bottom: 0px;
+  padding: 5px;
+  width: 100%;
+  background: white;
 }
