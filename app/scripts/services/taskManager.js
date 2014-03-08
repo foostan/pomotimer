@@ -45,12 +45,16 @@ app.factory("TaskManager", function () {
         },
 
         resetWip: function (task) {
-            angular.forEach(tasks, function (task, i) {
-                if (task.state == 'wip') {
-                    task.state = 'none';
+            angular.forEach(tasks, function (tasc, i) {
+                if (tasc.state == 'wip' && tasc != task) {
+                    tasc.state = 'none';
                 }
             });
-            tasks[tasks.indexOf(task)].state = 'wip';
+            if (task.state == 'wip') {
+                task.state = 'none';
+            } else {
+                task.state = 'wip';
+            }
         },
 
         chCategory: function (task, category) {
