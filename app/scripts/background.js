@@ -8,7 +8,7 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
                     title: "Pomodoro finish!",
                     message: request.task.title,
                     contextMessage: "contextMessage",
-                    iconUrl: "images/yeoman.png"
+                    iconUrl: "images/icon128_kaku.png"
                 }, function () {});
 
                 chrome.extension.sendRequest({
