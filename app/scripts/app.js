@@ -7,7 +7,7 @@ var app = angular.module('angularApp', [
         'ngRoute',
         'ui.bootstrap',
         'xeditable',
-        'todoFilters'
+        'pomotimerFilters'
     ])
     .config(function ($routeProvider) {
         $routeProvider
@@ -20,4 +20,3 @@ var app = angular.module('angularApp', [
                 controller: 'backgroundCtrl'
             });
     });
-
