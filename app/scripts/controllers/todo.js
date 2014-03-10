@@ -34,6 +34,7 @@ app.controller("TodoCtrl", function ($scope, $interval, taskManager, pomodoroTim
     /* timer */
     $scope.pt = pomodoroTimer;
     var timer = $scope.timer = $scope.pt.get();
+    $scope.pt.updateTime();
 
     $scope.$watch('timer', function (newValue, oldValue) {
         if (newValue !== oldValue) {

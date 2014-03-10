@@ -9,9 +9,9 @@ app.factory("pomodoroTimer", function () {
         get: function () {
             timer = JSON.parse(localStorage.getItem(STORAGE_ID)) || {
                 time: POMODORO_TIME,
-                task: null,
                 startedAt: null,
-                isRunning: false
+                isRunning: false,
+                isFinished: false
             };
             return timer;
         },
@@ -21,34 +21,26 @@ app.factory("pomodoroTimer", function () {
             localStorage.setItem(STORAGE_ID, JSON.stringify(timer));
         },
 
-        getTime: function () {
-            if (timer.startedAt == null) {
-                return POMODORO_TIME;
-            } else {
-                var now = parseInt((new Date) / 1000);
-                return POMODORO_TIME - (now - timer.startedAt)
-            }
-        },
-
-        isFinished: function () {
-            return timer.isRunning && this.getTime() <= 0 ? true : false;
-        },
-
-        start: function (task) {
-            timer.task = task;
+        start: function () {
             timer.startedAt = parseInt((new Date) / 1000);
             timer.isRunning = true;
         },
 
         stop: function () {
-            timer.task = null;
             timer.startedAt = null;
             timer.isRunning = false;
+            this.updateTime();
         },
 
-        reset: function (task) {
-            timer.time = POMODORO_TIME;
-            timer.task = task;
+        updateTime: function () {
+            if (timer.startedAt == null) {
+                timer.time = POMODORO_TIME;
+            } else {
+                var now = parseInt((new Date) / 1000);
+                var newTime = POMODORO_TIME - (now - timer.startedAt)
+                timer.time = newTime > 0 ? newTime : 0;
+            }
+            timer.isFinished = timer.isRunning && timer.time <= 0 ? true : false;
         }
     };
 });
