@@ -118,11 +118,11 @@
         </span>
       </div>
       <div collapse="task.state != 'wip'" class="pomodoro-timer">
-        <div class="time">{{time | timer}}</div>
-        <button class="btn btn-primary" ng-click="timer_start(task)" ng-disabled="running"><i
+        <div class="time">{{timer.time | timer}}</div>
+        <button class="btn btn-primary" ng-click="timer.start(task)" ng-disabled="timer.running"><i
             class="glyphicon glyphicon-play"></i> Start Timer
         </button>
-        <button class="btn btn-danger" ng-click="timer_stop(task)" ng-disabled="!running"><i
+        <button class="btn btn-danger" ng-click="timer.stop(task)" ng-disabled="!timer.running"><i
             class="glyphicon glyphicon-stop"></i> Stop Timer
         </button>
       </div>

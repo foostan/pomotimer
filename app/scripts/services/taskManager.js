@@ -1,7 +1,7 @@
 'use strict';
 
-app.factory("TaskManager", function () {
-    var STORAGE_ID = 'pomotimer';
+app.factory("taskManager", function () {
+    var STORAGE_ID = 'pomotimerTaskManager';
     var tasks = [];
 
     return {

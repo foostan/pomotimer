@@ -1,16 +1,15 @@
 'use strict';
 
-app.controller("TodoCtrl", function ($scope, $interval, TaskManager, PomodoroTimer) {
+app.controller("TodoCtrl", function ($scope, $interval, taskManager, pomodoroTimer) {
 
     $scope.category = 'today';
-    $scope.tm = TaskManager;
-    var tasks = $scope.tasks = $scope.tm.get();
-    $scope.tm.resetCountToday(tasks);
-    $scope.timer = PomodoroTimer;
 
-    console.log(tasks);
 
     /* task */
+    $scope.tm = taskManager;
+    var tasks = $scope.tasks = $scope.tm.get();
+    $scope.tm.resetCountToday(tasks);
+
     $scope.$watch('tasks', function (newValue, oldValue) {
         if (newValue !== oldValue) {
             $scope.tm.put(tasks);
@@ -33,56 +32,33 @@ app.controller("TodoCtrl", function ($scope, $interval, TaskManager, PomodoroTim
     }
 
     /* timer */
-    var running;
-    $scope.time = PomodoroTimer.getTime();
-    $scope.start_time = PomodoroTimer.getStartTime();
-    $scope.running = PomodoroTimer.isRunning();
+    $scope.pt = pomodoroTimer;
+    var timer = $scope.timer = $scope.pt.get();
 
-    $scope.timer_start = function (task) {
-        PomodoroTimer.start(task);
-        if (angular.isDefined(running)) return;
-        running = $interval(function () {
-            $scope.time = PomodoroTimer.getTime();
-            $scope.running = PomodoroTimer.isRunning();
-        }, 1000);
-
-        chrome.extension.sendRequest({
-            action: 'timer-start',
-            time: $scope.time,
-            task: task
-        });
-    }
-
-    $scope.timer_stop = function (task) {
-        if (angular.isDefined(running)) {
-            $interval.cancel(running);
-            running = undefined;
+    $scope.$watch('timer', function (newValue, oldValue) {
+        if (newValue !== oldValue) {
+            $scope.pt.put(timer);
         }
+    }, true);
 
-        if (PomodoroTimer.isFinished()) {
-            console.log("finished");
-            $scope.tm.countup(task);
-        }
-        PomodoroTimer.stop(task);
-        $scope.time = PomodoroTimer.getTime();
-        $scope.start_time = PomodoroTimer.getStartTime();
-        $scope.running = PomodoroTimer.isRunning();
-    }
-
-    chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
-        console.log(request);
-        switch (request.action) {
-            case "timer-stop":
-                tasks.forEach(function (task) {
-                    if (task.$$hashKey == request.task.$$hashKey) {
-                        $scope.timer_stop(task);
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    });
+    //chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
+    //    console.log(request);
+    //    switch (request.action) {
+    //        case "timer-stop":
+    //            tasks.forEach(function (task) {
+    //                if (task.$$hashKey == request.task.$$hashKey) {
+    //                    $scope.timer_stop(task);
+    //                }
+    //            });
+    //            break;
+    //        case "timer-running":
+    //            console.log(request.time);
+    //            $scope.time = request.time;
+    //            $scope.running = true;
+    //        default:
+    //            break;
+    //    }
+    //});
 
     /* validate */
     $scope.checkCountToday = function (task, data) {
