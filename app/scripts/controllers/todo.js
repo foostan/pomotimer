@@ -8,39 +8,25 @@ app.controller("TodoCtrl", function ($scope, $interval, taskManager, pomodoroTim
     /* task */
     $scope.tm = taskManager;
     var tasks = $scope.tasks = $scope.tm.get();
-    $scope.tm.resetCountToday(tasks);
-
     $scope.$watch('tasks', function (newValue, oldValue) {
         if (newValue !== oldValue) {
             $scope.tm.put(tasks);
         }
     }, true);
-
-    $scope.resetPomodoro = function (task) {
-        $scope.tm.resetWip(task);
-        $scope.timer_stop(task);
-    }
-
-    $scope.toggleState = function (task) {
-        $scope.tm.toggleState(task);
-        $scope.timer_stop(task);
-    }
-
-    $scope.chCategory = function (task, category) {
-        $scope.tm.chCategory(task, category);
-        $scope.timer_stop(task);
-    }
+    $scope.tm.resetCountToday(tasks);
+    console.log(tasks);
 
     /* timer */
     $scope.pt = pomodoroTimer;
     var timer = $scope.timer = $scope.pt.get();
-    $scope.pt.updateTime();
-
     $scope.$watch('timer', function (newValue, oldValue) {
         if (newValue !== oldValue) {
             $scope.pt.put(timer);
         }
     }, true);
+    $scope.pt.updateTime();
+    console.log(timer);
+
 
     //chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
     //    console.log(request);

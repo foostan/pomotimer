@@ -44,7 +44,8 @@ app.factory("taskManager", function () {
             tasks.splice(tasks.indexOf(task), 1);
         },
 
-        resetWip: function (task) {
+        resetWip: function (task, pt) {
+            pt.stop();
             angular.forEach(tasks, function (tasc, i) {
                 if (tasc.state == 'wip' && tasc != task) {
                     tasc.state = 'none';
@@ -57,14 +58,16 @@ app.factory("taskManager", function () {
             }
         },
 
-        chCategory: function (task, category) {
+        chCategory: function (task, category, pt) {
+            pt.stop();
             if (task.state == "wip") {
                 task.state = 'none';
             }
             task.category = category;
         },
 
-        toggleState: function (task) {
+        toggleState: function (task, pt) {
+            pt.stop();
             switch (task.state) {
                 case 'none':
                     task.state = 'done';
