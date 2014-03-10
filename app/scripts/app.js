@@ -12,11 +12,9 @@ var app = angular.module('angularApp', [
     .config(function ($routeProvider) {
         $routeProvider
             .when('/popup', {
-                templateUrl: 'views/popup.html',
-                controller: 'popupCtrl'
+                templateUrl: 'views/popup.html'
             })
             .when('/background', {
-                templateUrl: 'views/background.html',
-                controller: 'backgroundCtrl'
+                templateUrl: 'views/background.html'
             });
     });

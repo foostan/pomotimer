@@ -27,26 +27,6 @@ app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTi
     $scope.pt.updateTime();
     console.log(timer);
 
-
-    //chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
-    //    console.log(request);
-    //    switch (request.action) {
-    //        case "timer-stop":
-    //            tasks.forEach(function (task) {
-    //                if (task.$$hashKey == request.task.$$hashKey) {
-    //                    $scope.timer_stop(task);
-    //                }
-    //            });
-    //            break;
-    //        case "timer-running":
-    //            console.log(request.time);
-    //            $scope.time = request.time;
-    //            $scope.running = true;
-    //        default:
-    //            break;
-    //    }
-    //});
-
     /* validate */
     $scope.checkCountToday = function (task, data) {
         if (data == null || data == NaN) {
