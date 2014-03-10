@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller("TodoCtrl", function ($scope, $interval, taskManager, pomodoroTimer) {
+app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTimer) {
 
     $scope.category = 'today';
 

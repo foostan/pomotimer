@@ -14,13 +14,11 @@
     ],
 
     "background": {
-        "scripts": [
-            "scripts/background.js"
-        ]
+        "page": "index.html#/background"
     },
     "browser_action": {
         "default_icon": "images/icon19.png",
         "default_title": "Pomotimer",
-        "default_popup": "index.html"
+        "default_popup": "index.html#/popup"
     }
 }

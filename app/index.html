@@ -47,93 +47,6 @@
 <!-- Add your site or application content here -->
 <div class="container" ng-view=""></div>
 
-<section ng-controller="TodoCtrl">
-  <header>
-    <ul class="nav nav-pills">
-      <li ng:class="{true: 'active'}[category == 'today']"><a ng-click="category = 'today'">Today</a></li>
-      <li ng:class="{true: 'active'}[category == 'inventory']"><a ng-click="category = 'inventory'">Inventory</a>
-      </li>
-      <li ng:class="{true: 'active'}[category == 'archived']"><a ng-click="category = 'archived'">Archived</a>
-      </li>
-    </ul>
-  </header>
-
-  <sction>
-    <div>
-      <a class="btn-addtask" ng-click="tm.add({category: category})">
-        <i class="glyphicon glyphicon-plus-sign"></i> Add task
-      </a>
-    </div>
-    <div ng-repeat="task in tasks | filter:{category: category}">
-      <div class="task" ng:class="{true:'task-done', false:'task-wip'}[task.state=='done']">
-        <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.state=='done']"
-              glyphicon-unchecked ng-click="tm.toggleState(task,pt)"></span>
-
-        <span class="title" editable-text="task.title">
-          {{ task.title || 'no title' }}
-        </span>
-
-        <span ng-if="task.count_total != null">
-          -
-          <span ng-if="category == 'today'">
-            <span class="count_today" editable-number="task.count_today" onbeforesave="checkCountToday(task, $data)">
-              {{ task.count_today }}
-            </span>
-            /
-          </span>
-          <span class="count_total" editable-number="task.count_total" onbeforesave="checkCountTotal(task, $data)">
-            {{ task.count_total }}
-          </span>
-        </span>
-        <a ng-if="task.state!='done' && task.category=='today'" class="btn-pomodoro" ng-click="tm.resetWip(task,pt)">
-        <i class="glyphicon glyphicon-time"></i>
-        </a>
-        <span class="dropdown">
-          <a class="dropdown-toggle"><i class="glyphicon glyphicon-cog"></i></a>
-          <ul class="dropdown-menu">
-            <li>
-              <a ng-if="task.category!='today'" class="btn-chcategory" ng-click="tm.chCategory(task, 'today',pt)">
-              <i class="glyphicon glyphicon-chevron-right"></i> Move to Today
-              </a>
-            </li>
-            <li>
-              <a ng-if="task.category!='inventory'" class="btn-chcategory"
-                 ng-click="tm.chCategory(task, 'inventory',pt)">
-              <i class="glyphicon glyphicon-chevron-right"></i> Move to Inventory
-              </a>
-            </li>
-            <li>
-              <a ng-if="task.category!='archived'" class="btn-chcategory"
-                 ng-click="tm.chCategory(task, 'archived',pt)">
-              <i class="glyphicon glyphicon-chevron-right"></i> Move to Archived
-              </a>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li>
-              <a class="btn-deltask" ng-click="tm.del(task)">
-                <i class="glyphicon glyphicon-trash"></i> Delete
-              </a>
-            </li>
-          </ul>
-        </span>
-      </div>
-      <div collapse="task.state != 'wip'" class="pomodoro-timer">
-        <div class="time">{{timer.time | timer}}</div>
-        <button class="btn btn-primary" ng-click="pt.start()" ng-disabled="timer.isRunning"><i
-            class="glyphicon glyphicon-play"></i> Start Timer
-        </button>
-        <button class="btn btn-danger" ng-click="pt.stop()" ng-disabled="!timer.isRunning"><i
-            class="glyphicon glyphicon-stop"></i> Stop Timer
-        </button>
-      </div>
-    </div>
-  </sction>
-
-  <footer>
-    footer
-  </footer>
-</section>
-
 <!-- build:js scripts/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/jquery/jquery.js"></script>
@@ -152,7 +65,8 @@
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
-<script src="scripts/controllers/todo.js"></script>
+<script src="scripts/controllers/background.js"></script>
+<script src="scripts/controllers/popup.js"></script>
 <script src="scripts/services/taskManager.js"></script>
 <script src="scripts/services/pomodoroTimer.js"></script>
 <script src="scripts/filters/todo.js"></script>
