@@ -1,7 +1,7 @@
 'use strict';
 
 app.factory("taskManager", function () {
-    var STORAGE_ID = 'pomotimerTaskManager';
+    var STORAGE_ID = 'taskManager';
     var tasks = [];
 
     return {
@@ -31,8 +31,8 @@ app.factory("taskManager", function () {
             var new_task = {
                 title: task.title || '',
                 category: task.category || 'today',
-                count_today: task.count_today || 1,
-                count_total: task.count_total || 1,
+                count_today: task.count_today || 0,
+                count_total: task.count_total || 0,
                 state: task.state || 'none',
                 created_at: Math.round(new Date().getTime() / 1000),
                 updated_at: Math.round(new Date().getTime() / 1000)

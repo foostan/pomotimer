@@ -6,12 +6,9 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
             running = setInterval(function () {
                 if (--time > 0) {
                     chrome.extension.sendRequest({
-                        action: 'timer-running',
-                        task: request.task,
-                        time: time
+                        action: 'timer-update'
                     }, function (req) {
                     });
-
                 } else {
                     chrome.notifications.create('pomotimer', {
                         type: "basic",
@@ -23,11 +20,10 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
                     });
 
                     chrome.extension.sendRequest({
-                        action: 'timer-stop',
-                        task: request.task
+                        action: 'timer-stop'
                     }, function (req) {
                         if (req == null) {
-                            tasks = JSON.parse(localStorage.getItem('pomotimer') || '[]');
+                            var tasks = JSON.parse(localStorage.getItem('pomotimer') || '[]');
                             tasks.forEach(function (task) {
                                 if (task.$$hashKey == request.task.$$hashKey) {
                                     task.count_today++;

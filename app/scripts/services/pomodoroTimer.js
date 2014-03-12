@@ -2,7 +2,7 @@
 
 app.factory("pomodoroTimer", function () {
     var STORAGE_ID = 'pomodoroTimer';
-    var POMODORO_TIME = 10;
+    var POMODORO_TIME = 2;
     var timer = null;
 
     return {
@@ -21,12 +21,14 @@ app.factory("pomodoroTimer", function () {
             localStorage.setItem(STORAGE_ID, JSON.stringify(timer));
         },
 
-        start: function () {
+        start: function (task) {
             timer.startedAt = parseInt((new Date) / 1000);
             timer.isRunning = true;
 
             chrome.extension.sendRequest({
-                cmd: 'timer-start'
+                cmd: 'timer-start',
+                time: timer.time,
+                task: task
             }, function (req) {
             });
 

@@ -70,7 +70,7 @@
       </div>
       <div collapse="task.state != 'wip'" class="pomodoro-timer">
         <div class="time">{{timer.time | timer}}</div>
-        <button class="btn btn-primary" ng-click="pt.start()" ng-disabled="timer.isRunning"><i
+        <button class="btn btn-primary" ng-click="pt.start(task)" ng-disabled="timer.isRunning"><i
             class="glyphicon glyphicon-play"></i> Start Timer
         </button>
         <button class="btn btn-danger" ng-click="pt.stop()" ng-disabled="!timer.isRunning"><i
