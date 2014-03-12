@@ -2,7 +2,7 @@
 
 app.factory("pomodoroTimer", function () {
     var STORAGE_ID = 'pomodoroTimer';
-    var POMODORO_TIME = 2;
+    var POMODORO_TIME = 10;
     var timer = null;
 
     return {
@@ -21,42 +21,31 @@ app.factory("pomodoroTimer", function () {
             localStorage.setItem(STORAGE_ID, JSON.stringify(timer));
         },
 
-        start: function (task) {
+        start: function (background, task) {
             timer.startedAt = parseInt((new Date) / 1000);
             timer.isRunning = true;
 
-            chrome.extension.sendRequest({
-                cmd: 'timer-start',
-                time: timer.time,
-                task: task
-            }, function (req) {
-            });
-
-            //chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
-            //    console.log(request);
-            //    switch (request.action) {
-            //        case "timer-stop":
-            //            tasks.forEach(function (task) {
-            //                if (task.$$hashKey == request.task.$$hashKey) {
-            //                    $scope.timer_stop(task);
-            //                }
-            //            });
-            //            break;
-            //        case "timer-running":
-            //            console.log(request.time);
-            //            $scope.time = request.time;
-            //            $scope.running = true;
-            //        default:
-            //            break;
-            //    }
-            //});
-
+            if (background) {
+                chrome.extension.sendRequest({
+                    cmd: 'timer-start',
+                    time: timer.time,
+                    task: task
+                }, function (req) {
+                });
+            }
         },
 
-        stop: function () {
+        stop: function (background, task) {
             timer.startedAt = null;
             timer.isRunning = false;
             this.updateTime();
+
+            if (background) {
+                chrome.extension.sendRequest({
+                    cmd: 'timer-stop'
+                }, function (req) {
+                });
+            }
         },
 
         updateTime: function () {

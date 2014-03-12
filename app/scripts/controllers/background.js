@@ -1,18 +1,27 @@
 'use strict';
 
 app.controller("backgroundCtrl", function ($scope, $interval, taskManager, pomodoroTimer) {
+    var stop;
     chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
-        var running = null;
         switch (request.cmd) {
             case "timer-start":
                 var time = request.time;
-                running = setInterval(function () {
-                    if (--time > 0) {
-                        chrome.extension.sendRequest({
-                            action: 'timer-update'
-                        }, function (req) {
+                stop = $interval(function () {
+                    if (--time <= 0) {
+                        // update tasks and timer
+                        var timer = pomodoroTimer.get();
+                        pomodoroTimer.stop();
+                        pomodoroTimer.put(timer);
+
+                        var tasks = taskManager.get();
+                        tasks.forEach(function (task) {
+                            if (task.$$hashKey == request.task.$$hashKey) {
+                                taskManager.countup(task);
+                            }
                         });
-                    } else {
+                        taskManager.put(tasks);
+                        console.log("Finished and updated!");
+
                         chrome.notifications.create('pomotimer', {
                             type: "basic",
                             title: "Pomodoro finish!",
@@ -22,30 +31,14 @@ app.controller("backgroundCtrl", function ($scope, $interval, taskManager, pomod
                         }, function () {
                         });
 
-                        chrome.extension.sendRequest({
-                            action: 'timer-stop'
-                        }, function (req) {
-                            if (req == null) {
-                                var timer = pomodoroTimer.get();
-                                pomodoroTimer.stop();
-                                pomodoroTimer.put(timer);
-
-                                var tasks = taskManager.get();
-                                tasks.forEach(function (task) {
-                                    if (task.$$hashKey == request.task.$$hashKey) {
-                                        taskManager.countup(task);
-                                    }
-                                });
-                                taskManager.put(tasks);
-                                console.log("Finished and updated!");
-                            }
-                        });
-                        clearInterval(running);
+                        $interval.cancel(stop);
                     }
                     console.log(time);
                 }, 1000);
                 break;
-            default:
+            case "timer-stop":
+                console.log("stop");
+                $interval.cancel(stop);
                 break;
         }
     });

@@ -4,7 +4,6 @@ app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTi
 
     $scope.category = 'today';
 
-
     /* task */
     $scope.tm = taskManager;
     var tasks = $scope.tasks = $scope.tm.get();
@@ -26,6 +25,33 @@ app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTi
     }, true);
     $scope.pt.updateTime();
     console.log(timer);
+
+    /* update view */
+    $scope.startTimer = function (background, task) {
+        $scope.startTimerInterval();
+        $scope.pt.start(background, task);
+    }
+
+    $scope.stopTimer = function (background, task) {
+        $interval.cancel(stop);
+        $scope.pt.stop(background, task);
+    }
+
+    var stop;
+    $scope.startTimerInterval = function () {
+        stop = $interval(function () {
+            $scope.pt.updateTime();
+            console.log(timer);
+            if (timer.isFinished) {
+                $scope.stopTimer(false);
+            }
+        }, 1000);
+    }
+
+    if (timer.isRunning) {
+        $scope.startTimerInterval();
+    }
+
 
     /* validate */
     $scope.checkCountToday = function (task, data) {
