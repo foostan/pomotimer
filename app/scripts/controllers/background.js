@@ -20,7 +20,6 @@ app.controller("backgroundCtrl", function ($scope, $interval, taskManager, pomod
                             }
                         });
                         taskManager.put(tasks);
-                        console.log("Finished and updated!");
 
                         chrome.notifications.create('pomotimer', {
                             type: "basic",
@@ -31,13 +30,16 @@ app.controller("backgroundCtrl", function ($scope, $interval, taskManager, pomod
                         }, function () {
                         });
 
+                        chrome.extension.sendRequest({
+                            cmd: 'stop-front-timer'
+                        }, function (req) {
+                        });
+
                         $interval.cancel(stop);
                     }
-                    console.log(time);
                 }, 1000);
                 break;
             case "timer-stop":
-                console.log("stop");
                 $interval.cancel(stop);
                 break;
         }

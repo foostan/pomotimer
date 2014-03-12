@@ -13,7 +13,6 @@ app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTi
         }
     }, true);
     $scope.tm.resetCountToday(tasks);
-    console.log(tasks);
 
     /* timer */
     $scope.pt = pomodoroTimer;
@@ -24,34 +23,36 @@ app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTi
         }
     }, true);
     $scope.pt.updateTime();
-    console.log(timer);
 
-    /* update view */
-    $scope.startTimer = function (background, task) {
-        $scope.startTimerInterval();
-        $scope.pt.start(background, task);
+    $scope.startTimer = function (task) {
+        $scope.setTimerInterval();
+        $scope.pt.start(task);
     }
 
-    $scope.stopTimer = function (background, task) {
+    $scope.stopTimer = function (task) {
+        tasks = $scope.tasks = $scope.tm.get();
         $interval.cancel(stop);
-        $scope.pt.stop(background, task);
+        $scope.pt.stop(task);
     }
 
     var stop;
-    $scope.startTimerInterval = function () {
+    $scope.setTimerInterval = function () {
         stop = $interval(function () {
             $scope.pt.updateTime();
-            console.log(timer);
-            if (timer.isFinished) {
-                $scope.stopTimer(false);
-            }
         }, 1000);
     }
 
     if (timer.isRunning) {
-        $scope.startTimerInterval();
+        $scope.setTimerInterval();
     }
 
+    chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
+        switch (request.cmd) {
+            case "stop-front-timer":
+                $scope.stopTimer();
+                break;
+        }
+    });
 
     /* validate */
     $scope.checkCountToday = function (task, data) {
@@ -63,9 +64,6 @@ app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTi
     };
 
     $scope.checkCountTotal = function (task, data) {
-        console.log(task.count_today)
-        console.log(task.count_total)
-        console.log(data)
         if (data == null || data == NaN) {
             return "Please input a number";
         } else if (data < task.count_today || data < 0) {

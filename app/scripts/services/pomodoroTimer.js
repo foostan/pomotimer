@@ -21,31 +21,27 @@ app.factory("pomodoroTimer", function () {
             localStorage.setItem(STORAGE_ID, JSON.stringify(timer));
         },
 
-        start: function (background, task) {
+        start: function (task) {
             timer.startedAt = parseInt((new Date) / 1000);
             timer.isRunning = true;
 
-            if (background) {
-                chrome.extension.sendRequest({
-                    cmd: 'timer-start',
-                    time: timer.time,
-                    task: task
-                }, function (req) {
-                });
-            }
+            chrome.extension.sendRequest({
+                cmd: 'timer-start',
+                time: timer.time,
+                task: task
+            }, function (req) {
+            });
         },
 
-        stop: function (background, task) {
+        stop: function (task) {
             timer.startedAt = null;
             timer.isRunning = false;
             this.updateTime();
 
-            if (background) {
-                chrome.extension.sendRequest({
-                    cmd: 'timer-stop'
-                }, function (req) {
-                });
-            }
+            chrome.extension.sendRequest({
+                cmd: 'timer-stop'
+            }, function (req) {
+            });
         },
 
         updateTime: function () {
