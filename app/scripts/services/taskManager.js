@@ -11,8 +11,13 @@ app.factory("taskManager", function () {
         },
 
         put: function (tascs) {
-            tasks = tascs
-            localStorage.setItem(STORAGE_ID, JSON.stringify(tasks));
+            localStorage.setItem(STORAGE_ID,
+                JSON.stringify(tascs, function (key, val) {
+                    if (key == '$$hashKey') {
+                        return undefined;
+                    }
+                    return val;
+                }));
         },
 
         resetCountToday: function (tasks) {
