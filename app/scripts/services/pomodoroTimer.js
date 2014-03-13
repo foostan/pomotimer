@@ -2,7 +2,7 @@
 
 app.factory("pomodoroTimer", function () {
     var STORAGE_ID = 'pomodoroTimer';
-    var POMODORO_TIME = 10;
+    var POMODORO_TIME = 1500;
     var timer = null;
 
     return {
@@ -17,7 +17,7 @@ app.factory("pomodoroTimer", function () {
         },
 
         put: function (tymer) {
-            timer = tymer
+            timer = tymer;
             localStorage.setItem(STORAGE_ID, JSON.stringify(timer));
         },
 
@@ -39,7 +39,8 @@ app.factory("pomodoroTimer", function () {
             this.updateTime();
 
             chrome.extension.sendRequest({
-                cmd: 'timer-stop'
+                cmd: 'timer-stop',
+                task: task
             }, function (req) {
             });
         },
@@ -49,7 +50,7 @@ app.factory("pomodoroTimer", function () {
                 timer.time = POMODORO_TIME;
             } else {
                 var now = parseInt((new Date) / 1000);
-                var newTime = POMODORO_TIME - (now - timer.startedAt)
+                var newTime = POMODORO_TIME - (now - timer.startedAt);
                 timer.time = newTime > 0 ? newTime : 0;
             }
             timer.isFinished = timer.isRunning && timer.time <= 0 ? true : false;
