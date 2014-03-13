@@ -15,7 +15,14 @@ $border-color: #bbb;
 body {
   height: 700px;
   width: 360px;
-  padding: 5px;
+  padding: 0px;
+  margin: 0px;
+  background: #fdfdfd;
+}
+
+.container {
+  padding: 0px;
+  margin: 0px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -101,11 +108,11 @@ body {
 
 /* Navigation */
 .nav {
-  padding: 10px 0px;
+  padding-bottom: 10px;
 
   > li {
     > a {
-      padding: 1px 10px;
+      border-radius: 0px;
     }
   }
 }
@@ -119,6 +126,10 @@ body {
 }
 
 /* Task */
+.tasks {
+  padding: 10px;
+}
+
 .task {
   border-bottom: 1px dotted $border-color;
   .title {

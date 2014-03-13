@@ -17,4 +17,6 @@ var app = angular.module('angularApp', [
             .when('/background', {
                 templateUrl: 'views/background.html'
             });
+    }).run(function (editableOptions) {
+        editableOptions.theme = 'bs3';
     });

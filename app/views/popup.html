@@ -1,4 +1,4 @@
-<section ng-controller="popupCtrl">
+<div ng-controller="popupCtrl">
   <header>
     <ul class="nav nav-pills">
       <li ng:class="{true: 'active'}[category == 'today']"><a ng-click="category = 'today'">Today</a></li>
@@ -9,13 +9,13 @@
     </ul>
   </header>
 
-  <sction>
+  <sction class="tasks">
     <div>
       <a class="btn-addtask" ng-click="tm.add({category: category})">
         <i class="glyphicon glyphicon-plus-sign"></i> Add task
       </a>
     </div>
-    <div ng-repeat="task in tasks | filter:{category: category}">
+    <div ng-repeat="task in tasks | filter:{category: category}" ng:class="{true:'even', false:'odd'}[$even==true]">
       <div class="task" ng:class="{true:'task-done', false:'task-wip'}[task.state=='done']">
         <span class="glyphicon" ng:class="{true:'glyphicon-check', false:'glyphicon-unchecked'}[task.state=='done']"
               glyphicon-unchecked ng-click="tm.toggleState(task,pt)"></span>
@@ -69,12 +69,12 @@
         </span>
       </div>
       <div collapse="task.state != 'wip'" class="pomodoro-timer">
-        <div class="time">{{timer.time | timer}}</div>
-        <button class="btn btn-primary" ng-click="startTimer(task)" ng-disabled="timer.isRunning"><i
-            class="glyphicon glyphicon-play"></i> Start Timer
+        <span class="time">{{timer.time | timer}}</span>
+        <button class="btn btn-primary" ng-click="startTimer(task)" ng-disabled="timer.isRunning">
+          <i class="glyphicon glyphicon-play"></i>
         </button>
-        <button class="btn btn-danger" ng-click="stopTimer(task)" ng-disabled="!timer.isRunning"><i
-            class="glyphicon glyphicon-stop"></i> Stop Timer
+        <button class="btn btn-danger" ng-click="stopTimer(task)" ng-disabled="!timer.isRunning">
+          <i class="glyphicon glyphicon-stop"></i>
         </button>
       </div>
     </div>
@@ -83,4 +83,4 @@
   <footer>
     Finished tasks: {{(tasks|filter:{state: 'done'}).length}} / {{tasks.length}}
   </footer>
-</section>
+</div>
