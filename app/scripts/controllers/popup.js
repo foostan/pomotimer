@@ -1,7 +1,6 @@
 'use strict';
 
 app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTimer) {
-
     $scope.category = 'today';
 
     /* task */
@@ -23,6 +22,9 @@ app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTi
         }
     }, true);
     $scope.pt.updateTime();
+    $scope.pbar_style = {
+        'width': '100%'
+    };
 
     $scope.startTimer = function (task) {
         $scope.setTimerInterval();
@@ -33,13 +35,19 @@ app.controller("popupCtrl", function ($scope, $interval, taskManager, pomodoroTi
         tasks = $scope.tasks = $scope.tm.get();
         $interval.cancel(stop);
         $scope.pt.stop(task);
+        $scope.pbar_style = {
+            'width': Math.floor(timer.time / 15) + '%'
+        };
     }
 
     var stop;
     $scope.setTimerInterval = function () {
         stop = $interval(function () {
             $scope.pt.updateTime();
-        }, 1000);
+            $scope.pbar_style = {
+                'width': Math.floor(timer.time / 15) + '%'
+            };
+        }, 100);
     }
 
     if (timer.isRunning) {

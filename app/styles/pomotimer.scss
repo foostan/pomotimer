@@ -196,10 +196,16 @@ a {
   padding: 10px;
 
   > .time {
-    font-size: 20px;
+    font-size: 40px;
     font-weight: bold;
-    color: red;
+    color: #933;
   }
+}
+
+.progress {
+  height: 5px;
+  margin: 2px;
+
 }
 
 footer {

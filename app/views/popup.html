@@ -76,6 +76,10 @@
         <button class="btn btn-danger" ng-click="stopTimer(task)" ng-disabled="!timer.isRunning">
           <i class="glyphicon glyphicon-stop"></i>
         </button>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{timer.time}}" aria-valuemin="0"
+               aria-valuemax="1500" ng-style="pbar_style"></div>
+        </div>
       </div>
     </div>
   </sction>
