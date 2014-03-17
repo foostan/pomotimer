@@ -34,6 +34,7 @@ app.factory("taskManager", function () {
         add: function (task) {
             task = task || {};
             var new_task = {
+                id: md5(Math.random(), new Date().getTime()),
                 title: task.title || '',
                 category: task.category || 'today',
                 count_today: task.count_today || 0,

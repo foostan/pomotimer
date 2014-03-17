@@ -15,7 +15,8 @@ app.controller("backgroundCtrl", function ($scope, $interval, taskManager, pomod
 
                         var tasks = taskManager.get();
                         tasks.forEach(function (task) {
-                            if (task.$$hashKey == request.task.$$hashKey) {
+                            console.log(task);
+                            if (task.id == request.task.id) {
                                 taskManager.countup(task);
                             }
                         });
