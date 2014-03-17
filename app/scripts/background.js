@@ -31,7 +31,6 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
                                 }
                             });
                             localStorage.setItem('pomotimer', JSON.stringify(tasks));
-                            console.log("Finished and updated!");
                         }
                     });
                     clearInterval(running);
