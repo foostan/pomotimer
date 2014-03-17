@@ -2,7 +2,7 @@
 
 app.factory("pomodoroTimer", function () {
     var STORAGE_ID = 'pomodoroTimer';
-    var POMODORO_TIME = 5;
+    var POMODORO_TIME = 1500;
     var timer = null;
 
     return {
