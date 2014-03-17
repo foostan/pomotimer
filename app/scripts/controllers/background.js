@@ -26,7 +26,6 @@ app.controller("backgroundCtrl", function ($scope, $interval, taskManager, pomod
                             type: "basic",
                             title: "Pomodoro finish!",
                             message: request.task.title,
-                            contextMessage: "contextMessage",
                             iconUrl: "images/icon128_kaku.png"
                         }, function () {
                         });
