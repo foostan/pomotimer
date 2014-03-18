@@ -21,6 +21,9 @@ app.controller("backgroundCtrl", function ($scope, $interval, taskManager, pomod
                         });
                         taskManager.put(tasks);
 
+                        chrome.notifications.clear('pomotimer', function () {
+                        });
+
                         chrome.notifications.create('pomotimer', {
                             type: "basic",
                             title: "Pomodoro finish!",
