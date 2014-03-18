@@ -36,8 +36,8 @@
             {{ task.count_total }}
           </span>
         </span>
-        <a ng-if="task.state!='done' && task.category=='today'" class="btn-pomodoro" ng-click="tm.resetWip(task,pt)">
-          <i class="glyphicon glyphicon-time"></i>
+        <a ng-if="task.state!='done' && !timer.isRunning" class="btn-pomodoro" ng-click="tm.resetWip(task,pt)">
+        <i class="glyphicon glyphicon-time"></i>
         </a>
         <span class="dropdown">
           <a class="dropdown-toggle"><i class="glyphicon glyphicon-cog"></i></a>
