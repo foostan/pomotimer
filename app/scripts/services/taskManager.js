@@ -73,12 +73,12 @@ app.factory("taskManager", function () {
         },
 
         toggleState: function (task, pt) {
-            pt.stop();
             switch (task.state) {
                 case 'none':
                     task.state = 'done';
                     break;
                 case 'wip':
+                    pt.stop();
                     task.state = 'done';
                     break;
                 case 'done':
