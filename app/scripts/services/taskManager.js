@@ -65,8 +65,8 @@ app.factory("taskManager", function () {
         },
 
         chCategory: function (task, category, pt) {
-            pt.stop();
             if (task.state == "wip") {
+                pt.stop();
                 task.state = 'none';
             }
             task.category = category;
