@@ -9,9 +9,9 @@
     </ul>
   </header>
 
-  <sction class="tasks">
-    <div>
-      <a class="btn-addtask" ng-click="tm.add({category: category})">
+  <div class="tasks">
+    <div class="task task-add">
+    <a class="btn-addtask" ng-click="tm.add({category: category})">
         <i class="glyphicon glyphicon-plus-sign"></i> Add task
       </a>
     </div>
@@ -37,7 +37,7 @@
           </span>
         </span>
         <a ng-if="task.state!='done' && !timer.isRunning" class="btn-pomodoro" ng-click="tm.resetWip(task,pt)">
-        <i class="glyphicon glyphicon-time"></i>
+          <i class="glyphicon glyphicon-time"></i>
         </a>
         <span class="dropdown">
           <a class="dropdown-toggle"><i class="glyphicon glyphicon-cog"></i></a>
@@ -67,22 +67,23 @@
             </li>
           </ul>
         </span>
-      </div>
-      <div collapse="task.state != 'wip'" class="pomodoro-timer">
-        <span class="time">{{timer.time | timer}}</span>
-        <button class="btn btn-primary" ng-click="startTimer(task)" ng-disabled="timer.isRunning">
-          <i class="glyphicon glyphicon-play"></i>
-        </button>
-        <button class="btn btn-danger" ng-click="stopTimer(task)" ng-disabled="!timer.isRunning">
-          <i class="glyphicon glyphicon-stop"></i>
-        </button>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuenow="{{timer.time}}" aria-valuemin="0"
-               aria-valuemax="1500" ng-style="pbar_style"></div>
+
+        <div collapse="task.state != 'wip'" class="pomodoro-timer">
+          <span class="time">{{timer.time | timer}}</span>
+          <button class="btn btn-primary" ng-click="startTimer(task)" ng-disabled="timer.isRunning">
+            <i class="glyphicon glyphicon-play"></i>
+          </button>
+          <button class="btn btn-danger" ng-click="stopTimer(task)" ng-disabled="!timer.isRunning">
+            <i class="glyphicon glyphicon-stop"></i>
+          </button>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{timer.time}}" aria-valuemin="0"
+                 aria-valuemax="1500" ng-style="pbar_style"></div>
+          </div>
         </div>
       </div>
     </div>
-  </sction>
+  </div>
 
   <footer>
     Finished tasks: {{(tasks|filter:{state: 'done'}).length}} / {{tasks.length}}
