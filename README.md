@@ -1,4 +1,4 @@
 Pomotimer
 =========
 
-This is a timer for the pomodoro technique.
+This is a timer/todo list for the pomodoro technique.
